@@ -50,6 +50,7 @@ const btnRemove = document.getElementById('btn-remove');
 //         - Agregarlo al contenedor #contenido
 //         - Aplicar eventos hover (función del ejercicio 3)
 // Aplicar hover/toggle a un párrafo
+//
 function aplicarHover(parrafo) {
     if (!parrafo) return;
     parrafo.style.cursor = 'pointer';
