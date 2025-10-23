@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 4. Tarea: Calculadora y Bucles en JavaScript</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+
+    .calculadora-container {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 700px;
+        min-height: 520px;
+        margin: 36px auto;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #0d6efd;
+    }
+
+    .btn {
+        margin: 5px;
+    }
+
+    #resultado {
+        text-align: center;
+        font-size: 1.1rem;
+    }
+
+    #numero1, #numero2 {
+        max-width: 250px;
+    }
+</style>
+
+<body>
+    <div class="calculadora-container">
+        <h1>Calculadora y Bucles en JavaScript</h1>
+        <br>
+
+    <!--Dos cajas de texto (input) para introducir dos números.-->
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <label for="numero1" class="form-label">Número 1:</label>
+            <input type="number" id="numero1" class="form-control" placeholder="Introduce el primer número">
+        </div>
+        <div class="col-md-6">
+            <label for="numero2" class="form-label">Número 2:</label>
+            <input type="number" id="numero2" class="form-control" placeholder="Introduce el segundo número">
+        </div>
+    </div>
+
+    <!--Botones para las operaciones básicas entre esos dos números:-->
+    <div class="mb-2">
+        <button class="btn btn-primary" onclick="sumar()">Sumar</button>
+        <button class="btn btn-primary" onclick="restar()">Restar</button>
+        <button class="btn btn-primary" onclick="multiplicar()">Multiplicar</button>
+        <button class="btn btn-primary" onclick="dividir()">Dividir</button>
+        <button class="btn btn-primary" onclick="modulo()">Módulo</button>
+        <button class="btn btn-primary" onclick="potencia()">Potencia</button>
+        <br>
+    </div>
+
+    <!-- Botones para ejecutar bucles usando Número 1 como repeticiones -->
+    <div class="mb-2">
+        <button class="btn btn-secondary" onclick="forTexto()">For (texto)</button>
+        <button class="btn btn-secondary" onclick="whileTexto()">While (texto)</button>
+        <button class="btn btn-secondary" onclick="doWhileTexto()">Do…While (texto)</button>
+        <br>
+    </div>
+
+    <div class="mb-3">
+        <button class="btn btn-info" onclick="forBadges()">For (badges)</button>
+        <button class="btn btn-info" onclick="whileBadges()">While (badges)</button>
+        <button class="btn btn-info" onclick="doWhileBadges()">Do…While (badges)</button>
+        <br>
+    </div>
+
+    <!--Botones para ejecutar bucles usando como número de repeticiones el valor del primer número (Número 1):-->
+
+    <!--Resultado-->
+    <div class="alert alert-info" id="resultado"></div>
+
+    </div>
+
+    <script>
+
+        const resultado = document.getElementById("resultado");
+
+        function getNumero1() {
+            return Number(document.getElementById("numero1").value) || 0;
+        }
+
+        function getNumero2() {
+            return Number(document.getElementById("numero2").value) || 0;
+        }
+
+        function sumar() {
+            let n1 = getNumero1();
+            let n2 = getNumero2();
+            let res = n1 + n2;
+            resultado.innerHTML = `<strong>Resultado de la suma:</strong> ${res}`;
+        }
+
+        function restar() {
+            let n1 = getNumero1();
+            let n2 = getNumero2();
+            let res = n1 - n2;
+            resultado.innerHTML = `<strong>Resultado de la resta:</strong> ${res}`;
+        }
+
+        function multiplicar() {
+            let n1 = getNumero1();
+            let n2 = getNumero2();
+            let res = n1 * n2;
+            resultado.innerHTML = `<strong>Resultado de la multiplicación:</strong> ${res}`;
+        }
+
+        function dividir() {
+            let n1 = getNumero1();
+            let n2 = getNumero2();
+            let res = n1 / n2;
+            resultado.innerHTML = `<strong>Resultado de la división:</strong> ${res}`;
+        }
+
+        function modulo() {
+            let n1 = getNumero1();
+            let n2 = getNumero2();
+            let res = n1 % n2;
+            resultado.innerHTML = `<strong>Resultado del modulo:</strong> ${res}`;
+        }
+
+        function potencia() {
+            let n1 = getNumero1();
+            let n2 = getNumero2();
+            let res = n1 ** n2;
+            resultado.innerHTML = `<strong>Resultado de la potencia:</strong> ${res}`;
+        }
+
+        // --- Funciones de bucles (texto y badges) ---
+        function forTexto() {
+            const veces = getNumero1();
+            let out = '';
+            for (let i = 0; i < veces; i++) {
+                out += `Repetición ${i + 1}` + '<br>';
+            }
+            resultado.innerHTML = out || '<em>No hay repeticiones (0)</em>';
+        }
+
+        function whileTexto() {
+            let veces = getNumero1();
+            let i = 0;
+            let out = '';
+            while (i < veces) {
+                out += `Repetición ${i + 1}` + '<br>';
+                i++;
+            }
+            resultado.innerHTML = out || '<em>No hay repeticiones (0)</em>';
+        }
+
+        function doWhileTexto() {
+            let veces = getNumero1();
+            let i = 0;
+            let out = '';
+            // Ejecutar al menos una vez incluso si veces <= 0
+            do {
+                out += `Repetición ${i + 1}` + '<br>';
+                i++;
+            } while (i < veces);
+            resultado.innerHTML = out;
+        }
+
+        function forBadges() {
+            const veces = getNumero1();
+            let out = '';
+            for (let i = 0; i < veces; i++) {
+                out += `<span class="badge bg-primary me-1">${i + 1}</span>`;
+            }
+            resultado.innerHTML = out || '<em>No hay repeticiones (0)</em>';
+        }
+
+        function whileBadges() {
+            let veces = getNumero1();
+            let i = 0;
+            let out = '';
+            while (i < veces) {
+                out += `<span class="badge bg-success me-1">${i + 1}</span>`;
+                i++;
+            }
+            resultado.innerHTML = out || '<em>No hay repeticiones (0)</em>';
+        }
+
+        function doWhileBadges() {
+            let veces = getNumero1();
+            let i = 0;
+            let out = '';
+            // Ejecutar al menos una vez incluso si veces <= 0
+            do {
+                out += `<span class="badge bg-warning text-dark me-1">${i + 1}</span>`;
+                i++;
+            } while (i < veces);
+            resultado.innerHTML = out;
+        }
+
+    </script>
+
+</body>
+
+</html>
