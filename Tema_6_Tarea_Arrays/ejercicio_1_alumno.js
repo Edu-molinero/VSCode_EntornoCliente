@@ -39,7 +39,7 @@ function ejercicio1() {
             "<p>Edad: " + this.edad + "</p>" +
             "<p>Curso: " + this.curso + "</p>";
     }
-
+ 
     var estudiante = {
         // TODO: Completar las propiedades del objeto
         nombre: $nombre,
