@@ -520,11 +520,11 @@ function mostrarArray(titulo, array) {
 var biblioteca = [];
 
 function agregarLibro() {
-    // TODO: Obtener valores de los inputs
-    var titulo = document.getElementById("titulo-input").value; // Obtener del input
-    var autor = document.getElementById("autor-input").value; // Obtener del input
-    var año = parseInt(document.getElementById("año-input").value, 10); // Obtener y convertir a número
-    var genero = document.getElementById("genero-input").value; // Obtener del select
+    // Obtener valores de los inputs con los IDs correctos del HTML
+    var titulo = document.getElementById("libro-titulo").value;
+    var autor = document.getElementById("libro-autor").value;
+    var año = parseInt(document.getElementById("libro-year").value, 10);
+    var genero = document.getElementById("libro-genero").value;
 
     // TODO: Validar que todos los campos estén completos
     if (titulo === "" || autor === "" || año === 0 || genero === "") {
@@ -545,10 +545,10 @@ function agregarLibro() {
     biblioteca.push(libro);
 
     // Limpiar los inputs
-    document.getElementById("titulo-input").value = "";
-    document.getElementById("autor-input").value = "";
-    document.getElementById("año-input").value = "";
-    document.getElementById("genero-input").value = "";
+    document.getElementById("libro-titulo").value = "";
+    document.getElementById("libro-autor").value = "";
+    document.getElementById("libro-year").value = "";
+    document.getElementById("libro-genero").value = "";
 
     document.getElementById("resultado-ej10").innerHTML =
         "<div class='alert alert-success'>Libro '" + titulo + "' agregado a la biblioteca.</div>";
@@ -574,9 +574,13 @@ function ordenarPorTitulo() {
 }
 
 function filtrarPorGenero() {
-    // TODO: Obtener género seleccionado
-    // TODO: Filtrar libros por género
-    var generoSeleccionado = document.getElementById("genero-select").value;
+    // Usar el valor actual del select de género
+    var generoSeleccionado = document.getElementById("libro-genero").value;
+    if (!generoSeleccionado) {
+        document.getElementById("resultado-ej10").innerHTML = 
+            "<div class='alert alert-warning'>Por favor selecciona un género para filtrar.</div>";
+        return;
+    }
     var librosFiltrados = biblioteca.filter(function (libro) {
         return libro.genero === generoSeleccionado;
     });
