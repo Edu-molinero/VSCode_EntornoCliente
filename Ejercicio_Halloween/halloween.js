@@ -71,15 +71,18 @@ function setupKeyboardControls() {
         if (e.key === 'ArrowLeft') {
             // TODO: Mueve el jugador hacia la izquierda
             // Pista: playerPosition = Math.max(0, playerPosition - PLAYER_SPEED);
+            playerPosition = Math.max(0, playerPosition - PLAYER_SPEED);
 
         } else if (e.key === 'ArrowRight') {
             // TODO: Mueve el jugador hacia la derecha  
             // Pista: playerPosition = Math.min(CONTAINER_WIDTH - PLAYER_WIDTH, playerPosition + PLAYER_SPEED);
+            playerPosition = Math.min(CONTAINER_WIDTH - PLAYER_WIDTH, playerPosition + PLAYER_SPEED);
 
         }
 
         // TODO: Actualiza la posición visual del jugador
         // Pista: player.style.left = playerPosition + 'px';
+        player.style.left = playerPosition + 'px';
 
     });
 }
@@ -100,23 +103,33 @@ function handleCollision(objType) {
     if (objType === 'good') {
         // TODO: El jugador atrapó una calabaza
         // 1. Suma 10 puntos al score
+        score += 10;
 
         // 2. Actualiza el texto que muestra la puntuación
+        scoreDisplay.textContent = score;
 
         // 3. Si los puntos son múltiplo de 50, aumenta la velocidad
         // Pista: usa (score % 50 === 0) para verificar si es múltiplo
+        if (score % 50 === 0) {
+            gameSpeed += 0.5;
+        }
 
 
-    } else if (objType === 'bad') {
-        // TODO: El jugador tocó un fantasma
-        // 1. Resta 1 vida
-
-        // 2. Actualiza el texto que muestra las vidas
-
-        // 3. Si no quedan vidas, llama a endGame()
-
+        } else if (objType === 'bad') {
+            // TODO: El jugador tocó un fantasma
+            // 1. Resta 1 vida
+            lives -= 1;
+    
+            // 2. Actualiza el texto que muestra las vidas
+            livesDisplay.textContent = lives;
+    
+            // 3. Si no quedan vidas, llama a endGame()
+            if (lives <= 0) {
+                endGame();
+            }
+        }
     }
-}
+
 
 /**
  * EJERCICIO 3: DETECCIÓN DE COLISIONES
@@ -154,6 +167,10 @@ function checkCollision(obj) {
     //               objRect.right > playerRect.left &&
     //               objRect.top < playerRect.bottom &&
     //               objRect.bottom > playerRect.top;
+    return objRect.left < playerRect.right &&
+        objRect.right > playerRect.left &&
+        objRect.top < playerRect.bottom &&
+        objRect.bottom > playerRect.top;
 
     return false; // Cambia esto por la lógica correcta
 }
@@ -166,24 +183,33 @@ function checkCollision(obj) {
 function resetGameVariables() {
     // TODO: Reinicia las variables del juego a sus valores iniciales
     // 1. score = 0
+    score = 0;
 
     // 2. lives = 3
+    lives = 3;
 
     // 3. gameSpeed = 2
+    gameSpeed = 2;
 
     // 4. gameActive = true
+    gameActive = true;
 
     // 5. playerPosition = 270
+    playerPosition = 270;
 
 
     // TODO: Actualiza la interfaz
     // 1. Actualiza el texto de puntuación
+    scoreDisplay.textContent = score;
 
     // 2. Actualiza el texto de vidas
+    livesDisplay.textContent = lives;
 
     // 3. Actualiza la posición visual del jugador
+    player.style.left = playerPosition + 'px';
 
     // 4. Oculta la pantalla de game over
+    gameOverScreen.style.display = 'none';
 
 }
 
