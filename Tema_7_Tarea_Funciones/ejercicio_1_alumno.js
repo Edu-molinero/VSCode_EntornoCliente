@@ -38,10 +38,12 @@ document.getElementById('run-e3').addEventListener('click', function () {
 
 // Ejercicio 4 - Hoisting con var (plantilla)
 document.getElementById('run-e4').addEventListener('click', function () {
-  const out = document.getElementById('out-e4');
 
   // TODO: reproduce el ejemplo en el código editando esta función.
-  out.textContent = 'Implementa el ejemplo de hoisting con var aquí.';
+  console.log(x); // undefined debido a hoisting
+  var x = 5;
+  console.log(x); // 5
+  document.getElementById('out-e4').textContent = 'Revisa la consola para ver el resultado del hoisting con var.';
 });
 
 // Ejercicio 5 - IIFE (plantilla)
