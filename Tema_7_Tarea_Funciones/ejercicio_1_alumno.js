@@ -51,7 +51,7 @@ document.getElementById('run-e5').addEventListener('click', function () {
   // TODO: crea una IIFE que haga console.log y devuelva un valor. Luego muestra el resultado aquí.
   console.log('IIFE ejecutada.');
   alert('IIFE ejecutada.');
-  out.textContent = 'IIFE ejecutada. Revisa la consola y la alerta.';
+  out.textContent = 'IIFE fue ejecutada. Revisa la consola.';
 
 });
 
