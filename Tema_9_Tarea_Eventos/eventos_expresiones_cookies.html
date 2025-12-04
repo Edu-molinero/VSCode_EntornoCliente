@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Validaciones y Cookies</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Formulario de Registro</h1>
+        <div id="welcome" class="welcome-message"></div>
+        <form id="myForm">
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" name="username">
+                <div id="usernameHelp" class="help"></div>
+                <div id="usernameMsg" class="msg"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email">
+                <div id="emailHelp" class="help"></div>
+                <div id="emailMsg" class="msg"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password">
+                <div id="passwordHelp" class="help"></div>
+                <div id="passwordMsg" class="msg"></div>
+            </div>
+            <div class="form-group">
+                <label for="age">Edad</label>
+                <input type="number" id="age" name="age">
+                <div id="ageHelp" class="help"></div>
+                <div id="ageMsg" class="msg"></div>
+            </div>
+            <div class="form-group">
+                <label for="remember">
+                    <input type="checkbox" id="remember" name="remember"> Recordarme
+                </label>
+            </div>
+            <button type="submit">Enviar</button>
+            <button type="button" id="deleteCookie">Eliminar cookie</button>
+        </form>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
