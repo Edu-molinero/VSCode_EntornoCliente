@@ -1,6 +1,5 @@
-/* Estilos generales */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Times New Roman', Times, serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -31,7 +30,6 @@ h1 {
     margin-bottom: 20px;
 }
 
-/* Formulario */
 .form-group {
     margin-bottom: 15px;
 }
@@ -58,16 +56,14 @@ input[type="checkbox"] {
     margin-right: 5px;
 }
 
-/* Estilos para validación */
 .valid {
-    border-color: #4CAF50; /* Verde */
+    border-color: #4CAF50;
 }
 
 .invalid {
-    border-color: #f44336; /* Rojo */
+    border-color: #f44336;
 }
 
-/* Mensajes */
 .help {
     font-size: 0.9em;
     color: #666;
@@ -88,7 +84,6 @@ input[type="checkbox"] {
     color: #f44336;
 }
 
-/* Botones */
 button {
     width: 100%;
     padding: 10px;
@@ -117,7 +112,6 @@ button[type="button"]:hover {
     background-color: #da190b;
 }
 
-/* Responsivo */
 @media (max-width: 600px) {
     .container {
         padding: 15px;

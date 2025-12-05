@@ -1,98 +1,122 @@
-// Objeto con validaciones (regex, mensajes de ayuda y error)
+// Regex para validaciones
+const regex_username = /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/;
+const regex_email = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const regex_passwd = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+const regex_age = /^\d+$/;
+
+// Mensajes de ayuda y error
 const validations = {
-    username: {
-        regex: /^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$/,
+    username: { 
         help: "Introduce solo letras y espacios.",
-        error: "Formato incorrecto"
-    },
+        error: "Formato incorrecto" },
+
     email: {
-        regex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
         help: "Debe ser un correo electrónico válido.",
-        error: "Formato incorrecto"
-    },
+        error: "Formato incorrecto" },
+
     password: {
-        regex: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/,
         help: "Mín. 8 caracteres, 1 mayúscula, 1 número y 1 símbolo.",
-        error: "Formato incorrecto"
-    },
+        error: "Formato incorrecto" },
+
     age: {
-        regex: /^\d+$/,
         help: "Introduce solo números.",
-        error: "Formato incorrecto"
-    }
+        error: "Formato incorrecto" }
 };
 
-// Funciones para manejar cookies
+// Funciones básicas para cookies
 function setCookie(name, value, days) {
-    const date = new Date();
+    // Encode value to safely store spaces/special chars
+    var encoded = encodeURIComponent(value);
+    let date = new Date();
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+    document.cookie = name + "=" + encoded + ";expires=" + date.toUTCString() + ";path=/;SameSite=Lax";
 }
 
 function getCookie(name) {
-    const cookies = document.cookie.split(";");
+    let cookies = document.cookie.split(";");
     for (let i = 0; i < cookies.length; i++) {
-        const c = cookies[i].trim();
+        let c = cookies[i].trim();
         if (c.startsWith(name + "=")) {
-            return c.substring(name.length + 1);
+            // Decode the cookie value before returning
+            return decodeURIComponent(c.substring(name.length + 1));
         }
     }
     return "";
 }
 
 function deleteCookie(name) {
-    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
+    // Expire the cookie (ensure same path)
+    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;SameSite=Lax";
 }
 
-// Evento window.onload
-window.onload = function() {
-    // Comprobar cookie "username"
-    const username = getCookie("username");
+// Cuando la página carga
+window.addEventListener('load', function() {
+    // Cargar username de la cookie si existe
+    let username = getCookie("username");
     if (username) {
-        document.getElementById("welcome").innerText = "Bienvenido de nuevo, " + username;
-        document.getElementById("username").value = username;
+        var welcomeEl = document.getElementById("welcome");
+        if (welcomeEl) welcomeEl.innerText = "Bienvenido de nuevo, " + username;
+        var userInput = document.getElementById("username");
+        if (userInput) userInput.value = username;
     }
 
-    // Agregar event listeners a los campos
-    const fields = ["username", "email", "password", "age"];
-    fields.forEach(field => {
-        const input = document.getElementById(field);
-        input.addEventListener("focus", () => showHelp(field));
-        input.addEventListener("blur", () => hideHelp(field));
-        input.addEventListener("input", () => validateOnInput(field));
-    });
+    // Agregar eventos a los campos
+    let fields = ["username", "email", "password", "age"];
+    for (let i = 0; i < fields.length; i++) {
+        let field = fields[i];
+        let input = document.getElementById(field);
+        input.addEventListener("focus", function() { showHelp(field); });
+        input.addEventListener("blur", function() { hideHelp(field); });
+        input.addEventListener("input", function() { validateOnInput(field); });
+    }
 
-    // Event listener para submit
-    document.getElementById("myForm").addEventListener("submit", handleSubmit);
+    // Evento para el formulario
+    let deleteBtn = document.getElementById("deleteCookie");
+    if (deleteBtn) {  // Check si existe
+        deleteBtn.addEventListener('click', function() {
+            console.log("Botón clickeado");  // Para debug
+            deleteCookie("username");
+            var welcomeEl = document.getElementById("welcome");
+            if (welcomeEl) welcomeEl.innerText = "";
+            var userInput = document.getElementById("username");
+            if (userInput) userInput.value = "";
+            alert("Cookie eliminada correctamente.");
+        });
+    }
 
-    // Event listener para eliminar cookie
-    document.getElementById("deleteCookie").addEventListener("click", () => {
-        deleteCookie("username");
-        document.getElementById("welcome").innerText = "";
-        document.getElementById("username").value = "";
-        alert("Cookie eliminada correctamente.");
-    });
-};
+    // Añadir listener al envío del formulario (si existe)
+    var form = document.getElementById('myForm');
+    if (form) {
+        form.addEventListener('submit', handleSubmit);
+    }
+});
 
-// Función para mostrar mensaje de ayuda (onfocus)
+// Mostrar ayuda
 function showHelp(field) {
     document.getElementById(field + "Help").innerText = validations[field].help;
 }
 
-// Función para ocultar mensaje de ayuda (onblur)
+// Ocultar ayuda
 function hideHelp(field) {
     document.getElementById(field + "Help").innerText = "";
 }
 
-// Función para validación en vivo (oninput)
+// Validar mientras escribes
 function validateOnInput(field) {
-    const input = document.getElementById(field);
-    const msgDiv = document.getElementById(field + "Msg");
-    const value = input.value;
-    const isValid = validations[field].regex.test(value);
+    let input = document.getElementById(field);
+    let msgDiv = document.getElementById(field + "Msg");
+    let value = input.value;
+    let regex;
+    
+    // Asignar regex según el campo
+    if (field === "username") regex = regex_username;
+    else if (field === "email") regex = regex_email;
+    else if (field === "password") regex = regex_passwd;
+    else if (field === "age") regex = regex_age;
+    
+    let isValid = regex.test(value);
 
     if (value === "") {
-        // Si está vacío, no mostrar nada
         input.classList.remove("valid", "invalid");
         msgDiv.innerText = "";
     } else if (isValid) {
@@ -110,28 +134,49 @@ function validateOnInput(field) {
     }
 }
 
-// Función para manejar submit
+// Manejar envío del formulario
 function handleSubmit(e) {
-    const fields = ["username", "email", "password", "age"];
+    // Prevent default submission to handle everything client-side
+    if (e && typeof e.preventDefault === 'function') e.preventDefault();
+
+    let fields = ["username", "email", "password", "age"];
     let allValid = true;
 
-    fields.forEach(field => {
-        const input = document.getElementById(field);
-        const value = input.value;
-        if (!validations[field].regex.test(value)) {
-            allValid = false;
-            validateOnInput(field); // Mostrar error si no es válido
-        }
-    });
+    for (let i = 0; i < fields.length; i++) {
+        let field = fields[i];
+        let input = document.getElementById(field);
+        var value = input ? input.value : "";
+        let regex;
+        if (field === "username") regex = regex_username;
+        else if (field === "email") regex = regex_email;
+        else if (field === "password") regex = regex_passwd;
+        else if (field === "age") regex = regex_age;
 
-    if (!allValid) {
-        e.preventDefault();
-        alert("Debe corregir los errores antes de enviar.");
-    } else {
-        // Crear cookie con el nombre de usuario (duración 7 días)
-        const username = document.getElementById("username").value;
-        setCookie("username", username, 7);
-        alert("Formulario enviado correctamente.");
-        // No se previene el envío, pero en un entorno real podrías manejarlo con AJAX
+        if (!regex.test(value)) {
+            allValid = false;
+            validateOnInput(field);  // Mostrar error
+        }
     }
+
+    console.log("Funcionó");
+    if (!allValid) {
+        alert("Debe corregir los errores antes de enviar.");
+        return;
+    }
+
+    // Si pasa validación, gestionar cookie según checkbox 'remember'
+    var username = document.getElementById("username").value;
+    var remember = document.getElementById("remember");
+    if (remember && remember.checked) {
+        setCookie("username", username, 7);
+    } else {
+        // Asegurarse de eliminar cualquier cookie previa
+        deleteCookie("username");
+    }
+
+    // Mostrar mensaje de bienvenida inmediato
+    var welcomeEl = document.getElementById("welcome");
+    if (welcomeEl) welcomeEl.innerText = "Bienvenido de nuevo, " + username;
+
+    alert("Formulario enviado correctamente.");
 }
