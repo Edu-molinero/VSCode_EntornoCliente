@@ -59,9 +59,15 @@ window.addEventListener('load', function() {
         var userInput = document.getElementById("username");
         if (userInput) userInput.value = username;
     }
+    // Mostrar en consola las cookies actuales al cargar la página
+    console.log('Cookies al cargar la página:', document.cookie);
 
     // Agregar eventos a los campos
     let fields = ["username", "email", "password", "age"];
+    // Cambiar el tipo del input 'age' a text para permitir escribir letras
+    // (la validación en JS mostrará "Formato incorrecto" si no son dígitos)
+    var ageEl = document.getElementById('age');
+    if (ageEl) ageEl.type = 'text';
     for (let i = 0; i < fields.length; i++) {
         let field = fields[i];
         let input = document.getElementById(field);
@@ -80,6 +86,8 @@ window.addEventListener('load', function() {
             if (welcomeEl) welcomeEl.innerText = "";
             var userInput = document.getElementById("username");
             if (userInput) userInput.value = "";
+            // Mostrar en consola las cookies después de eliminar
+            console.log('Cookies después de eliminar:', document.cookie);
             alert("Cookie eliminada correctamente.");
         });
     }
@@ -169,9 +177,12 @@ function handleSubmit(e) {
     var remember = document.getElementById("remember");
     if (remember && remember.checked) {
         setCookie("username", username, 7);
+        // Mostrar en consola la cookie guardada
+        console.log('Cookie guardada (document.cookie):', document.cookie);
     } else {
         // Asegurarse de eliminar cualquier cookie previa
         deleteCookie("username");
+        console.log('Cookie eliminada desde submit (document.cookie):', document.cookie);
     }
 
     // Mostrar mensaje de bienvenida inmediato
