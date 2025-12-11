@@ -1,33 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario - Login</title>
-    <link rel="stylesheet" href="CSS/estilos.css">
-</head>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="CSS/estilos.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form action="">
+        <h1>Login</h1>
 
-<body>
-
-    <div class="login-container">
-        <h2><b>Formulario de login</b></h2>
-        <label>
-            <h3>Ingresa tu email:</h3>
-        </label>
-        <input type="text" name="nombre"><br><br>
-
-        <label>
-            <h3>Ingresa tu contraseña:</h3>
-        </label>
-
-        <input type="password" name="password"><br><br>
-
-        <div class="button-container">
-            <input type="submit" value="Iniciar sesión" name="enviar">
+        <div class="input-box">
+          <input type="text" placeholder="email" required />
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="password" required />
         </div>
 
-    </div>
-</body>
+        <button type="submit" class="btn">Login</button>
 
+      </form>
+    </div>
+  </body>
 </html>
