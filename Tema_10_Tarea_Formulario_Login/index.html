@@ -5,56 +5,121 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Formulario - Login</title>
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="CSS/estilos.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="boxicons/css/boxicons.css">
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="container">
-            <form action="">
-                <h1>Login</h1>
+    <div class="container mt-5">
+        <div class="login-card">
+            <h2 class="login-title">Login</h2>
 
-                <div class="input-box">
-                    <input type="text" placeholder="email" required />
-                    <i class="bx bxs-user"></i>
+            <div id="alertContainer"></div>
+
+            <div id="loadingSpinner">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Cargando...</span>
+                </div>
+                <p class="mt-2 text-muted">Validando credenciales...</p>
+            </div>
+
+            <form id="loginForm">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" class="form-control" id="email" placeholder="" required>
                 </div>
 
-                <div class="input-box">
-                    <input type="password" placeholder="contraseña" required />
-                    <i class="bx bxs-lock-alt"></i>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="" required>
                 </div>
 
-                <button type="submit" class="btn">Login</button>
-
+                <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
             </form>
+
+            <div class="credentials-info">
+                <strong>Credenciales válidas de prueba:</strong><br>
+                Email: <code>test@medac.es</code><br>
+                Password: <code>1234</code>
+            </div>
         </div>
     </div>
+
+    <script>
+        const emailCorrecto = "test@medac.es";
+        const passwordCorrecta = "1234";
+
+        function loginServidor(email, password) {
+            return new Promise((resolve, reject) => {
+
+                setTimeout(() => {
+                    if (email === emailCorrecto && password === passwordCorrecta) {
+                        resolve("Login correcto. Bienvenido.");
+                    } else {
+                        reject("Credenciales incorrectas.");
+                    }
+                }, 2000);
+            });
+        }
+
+        function mostrarAlerta(mensaje, tipo) {
+            const clase = tipo === 'success' ? 'alert-success' : 'alert-danger';
+            document.getElementById('alertContainer').innerHTML =
+                `<div class="alert ${clase}">${mensaje}</div>`;
+        }
+
+        function toggleSpinner(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            const form = document.getElementById('loginForm');
+
+            if (show) {
+                spinner.style.display = 'block';
+                form.style.display = 'none';
+            } else {
+                spinner.style.display = 'none';
+                form.style.display = 'block';
+            }
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            document.getElementById('alertContainer').innerHTML = '';
+
+            if (email === '' || password === '') {
+                mostrarAlerta('Por favor, completa todos los campos.', 'danger');
+                return;
+            }
+
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                mostrarAlerta('Por favor, introduce un email válido.', 'danger');
+                return;
+            }
+
+            toggleSpinner(true);
+
+            loginServidor(email, password)
+                .then((mensaje) => {
+                    mostrarAlerta(mensaje, 'success');
+                    toggleSpinner(false);
+                    document.getElementById('loginForm').reset();
+                })
+
+                .catch((error) => {
+                    toggleSpinner(false);
+                    mostrarAlerta(error, 'danger');
+                });
+        });
+    </script>
 
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        const form = document.querySelector('form');
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            new Promise((resolve, reject) => {
-                setTimeout(() => {
-                    resolve('Login exitoso');
-                }, 2000);
-
-
-            })
-                .then(response => {
-                    alert(response);
-                })
-                .catch(error => {
-                    alert('Error en el login: ' + error);
-                });
-        });
-    </script>
 </body>
 
 </html>
