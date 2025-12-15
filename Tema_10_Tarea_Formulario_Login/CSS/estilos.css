@@ -11,7 +11,7 @@ body {
 }
 
 .login-card {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.342);
   border-radius: 15px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   padding: 2rem;
@@ -20,11 +20,12 @@ body {
 }
 
 .login-title {
-  color: #667eea;
+  color: #ffffff;
   font-weight: 700;
   margin-bottom: 1.5rem;
   text-align: center;
 }
+
 
 .credentials-info {
   background: rgb(238, 248, 245);
