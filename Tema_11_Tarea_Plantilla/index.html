@@ -423,11 +423,11 @@
 
                 setTimeout(function () {
                     fakeUsers.forEach(function (user) {
-                        $("#ej5Lista").append(`<li class="list-group-item">${user.nombre}, ${user.edad} años</li>`);
+                        $("#ej5Lista").append(`<li class="list-group-item">Nombre: ${user.nombre}, Edad: ${user.edad}</li>`);
                     });
-                });
-                $("#ej5Estado").text("Estado: usuarios cargados");
-                boton.prop("disabled", false);
+                    $("#ej5Estado").text(`Estado: usuarios cargados (${fakeUsers.length})`);
+                    boton.prop("disabled", false);
+                }, 600);
             });
 
             $("#ej5Clear").on("click", function () {
