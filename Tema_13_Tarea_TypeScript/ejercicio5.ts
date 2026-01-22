@@ -13,8 +13,8 @@ function ejecutarEjercicio5(): void {
     
     // Array de productos
     const productos: Producto[] = [
-        { id: 1, nombre: "Laptop", precio: 899.99 },
-        { id: 2, nombre: "Mouse", precio: 25.50 },
+        { id: 1, nombre: "Portátil", precio: 899.99 },
+        { id: 2, nombre: "Ratón", precio: 25.50 },
         { id: 3, nombre: "Teclado", precio: 65.00 }
     ];
     

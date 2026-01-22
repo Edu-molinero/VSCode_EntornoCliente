@@ -7,7 +7,7 @@ function ejecutarEjercicio4() {
     // Variable de tipo Producto (correcta)
     const producto1 = {
         id: 1,
-        nombre: "Laptop",
+        nombre: "Portátil",
         precio: 899.99
     };
     console.log("Producto correcto:");

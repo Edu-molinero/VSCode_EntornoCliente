@@ -6,8 +6,8 @@ function ejecutarEjercicio5() {
     console.log("=== EJERCICIO 5: ARRAYS DE INTERFACES ===");
     // Array de productos
     const productos = [
-        { id: 1, nombre: "Laptop", precio: 899.99 },
-        { id: 2, nombre: "Mouse", precio: 25.50 },
+        { id: 1, nombre: "Portátil", precio: 899.99 },
+        { id: 2, nombre: "Ratón", precio: 25.50 },
         { id: 3, nombre: "Teclado", precio: 65.00 }
     ];
     // Recorrer y mostrar productos
