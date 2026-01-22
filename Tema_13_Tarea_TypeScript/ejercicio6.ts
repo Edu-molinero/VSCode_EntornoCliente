@@ -29,8 +29,6 @@ function ejecutarEjercicio6(): void {
     console.log(`Acceso a nombre (público): ${persona1.nombre}`);
     
     // Acceso a propiedad privada (comentado porque da error en compilación)
-    // console.log(`Acceso a edad (privado): ${persona1.edad}`); 
-    // Error: La propiedad 'edad' es privada y solo se puede acceder desde la clase 'Persona'
     
     console.log("============================================\n");
 }
