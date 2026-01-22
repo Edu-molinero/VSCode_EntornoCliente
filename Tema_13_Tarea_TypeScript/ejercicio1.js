@@ -2,11 +2,11 @@
 // Ejercicio 1 - Tipos básicos
 var _a;
 // Declaración de variables con tipos
-let nombreAlumno = "Juan Pérez";
+let nombreAlumno = "Eduardo Molinero";
 let edad = 20;
 let estaMatriculado = true;
 let notas = [8.5, 7.0, 9.2, 6.8, 8.0];
-const nombreCentro = "IES Tecnológico";
+const nombreCentro = "Medac";
 // Función para ejecutar el ejercicio
 function ejecutarEjercicio1() {
     console.log("=== EJERCICIO 1: TIPOS BÁSICOS ===");

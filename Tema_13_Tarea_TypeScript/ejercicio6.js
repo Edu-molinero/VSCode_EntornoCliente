@@ -15,7 +15,7 @@ class Persona {
 function ejecutarEjercicio6() {
     console.log("=== EJERCICIO 6: CLASES Y ENCAPSULACIÓN ===");
     // Crear objeto de la clase
-    const persona1 = new Persona("Carlos", 30);
+    const persona1 = new Persona("Eduardo", 20);
     // Llamar al método presentarse
     persona1.presentarse();
     // Acceso a propiedad pública (funciona)

@@ -41,9 +41,9 @@ function ejecutarEjercicio10(): void {
     
     // Crear array de alumnos
     const alumnos: AlumnoApp[] = [
-        new AlumnoApp(1, "Pedro Martínez", [7.5, 8.0, 6.5, 9.0, 7.0]),
-        new AlumnoApp(2, "Laura Sánchez", [9.0, 8.5, 9.5, 8.0, 9.0]),
-        new AlumnoApp(3, "Miguel Torres", [6.0, 5.5, 7.0, 6.5, 6.0])
+        new AlumnoApp(1, "Eduardo Molinero", [7.5, 8.0, 6.5, 9.0, 7.0]),
+        new AlumnoApp(2, "Manuel Robles", [9.0, 8.5, 9.5, 8.0, 9.0]),
+        new AlumnoApp(3, "Jesús Fernández", [6.0, 5.5, 7.0, 6.5, 6.0])
     ];
     
     // Mostrar resumen de cada alumno

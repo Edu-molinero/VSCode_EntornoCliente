@@ -1,11 +1,11 @@
 // Ejercicio 1 - Tipos básicos
 
 // Declaración de variables con tipos
-let nombreAlumno: string = "Juan Pérez";
+let nombreAlumno: string = "Eduardo Molinero";
 let edad: number = 20;
 let estaMatriculado: boolean = true;
 let notas: number[] = [8.5, 7.0, 9.2, 6.8, 8.0];
-const nombreCentro: string = "IES Tecnológico";
+const nombreCentro: string = "Medac";
 
 // Función para ejecutar el ejercicio
 function ejecutarEjercicio1(): void {

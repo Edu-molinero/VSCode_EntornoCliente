@@ -17,7 +17,7 @@ class EmpleadoEmpresa {
 function ejecutarEjercicio7() {
     console.log("=== EJERCICIO 7: CLASES E INTERFACES ===");
     // Crear objeto de la clase
-    const empleado1 = new EmpleadoEmpresa(101, "Ana García", 2500);
+    const empleado1 = new EmpleadoEmpresa(101, "Eduardo Molinero", 2350);
     console.log(`Empleado: ${empleado1.nombre}`);
     console.log(`ID: ${empleado1.id}`);
     console.log(`Sueldo mensual: ${empleado1.sueldoMensual}€`);
