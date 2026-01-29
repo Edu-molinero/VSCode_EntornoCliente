@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3 - SessionStorage</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+    <style>
+
+        body{
+            background-image: url('img/mountain.jpg');
+        }
+
+    </style>
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        <h3 class="mb-0">Formulario Temporal</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="alert alert-info">
+                            <p class="mb-0"><strong>Nota:</strong> Los datos desaparecen al cerrar la pestaña (no al recargar).</p>
+                        </div>
+
+                        <form id="form">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="curso" class="form-label">Curso</label>
+                                <select class="form-select" id="curso">
+                                    <option value="">Selecciona...</option>
+                                    <option value="1DAW">1º DAW</option>
+                                    <option value="2DAW">2º DAW</option>
+                                </select>
+                            </div>
+
+                            <button type="button" class="btn btn-primary w-100 mb-2" id="saveBtn">Guardar</button>
+                            <button type="button" class="btn btn-danger w-100" id="clearBtn">Limpiar</button>
+                        </form>
+
+                        <hr>
+
+                        <div id="datos" class="alert alert-light border d-none">
+                            <p><strong>Nombre:</strong> <span id="displayNombre">-</span></p>
+                            <p class="mb-0"><strong>Curso:</strong> <span id="displayCurso">-</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const nombre = document.getElementById('nombre');
+        const curso = document.getElementById('curso');
+        const saveBtn = document.getElementById('saveBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const datos = document.getElementById('datos');
+        const displayNombre = document.getElementById('displayNombre');
+        const displayCurso = document.getElementById('displayCurso');
+
+        function cargar() {
+            const n = sessionStorage.getItem('nombre');
+            const c = sessionStorage.getItem('curso');
+
+            if (n) {
+                nombre.value = n;
+                displayNombre.textContent = n;
+                datos.classList.remove('d-none');
+            }
+
+            if (c) {
+                curso.value = c;
+                displayCurso.textContent = c;
+                datos.classList.remove('d-none');
+            }
+        }
+
+        saveBtn.addEventListener('click', function() {
+            const n = nombre.value;
+            const c = curso.value;
+
+            if (n) {
+                sessionStorage.setItem('nombre', n);
+                displayNombre.textContent = n;
+            }
+
+            if (c) {
+                sessionStorage.setItem('curso', c);
+                displayCurso.textContent = c;
+            }
+
+            datos.classList.remove('d-none');
+        });
+
+        clearBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('nombre');
+            sessionStorage.removeItem('curso');
+
+            nombre.value = '';
+            curso.value = '';
+            displayNombre.textContent = '-';
+            displayCurso.textContent = '-';
+            datos.classList.add('d-none');
+        });
+
+        cargar();
+    </script>
+</body>
+</html>

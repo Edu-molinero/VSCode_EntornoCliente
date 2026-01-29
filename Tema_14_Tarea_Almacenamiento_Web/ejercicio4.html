@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparar almacenamientos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+    <style>
+
+        body{
+            background-image: url('img/mountain.jpg');
+        }
+
+    </style>
+
+<body class="bg-light">
+    <div class="container mt-5 mb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                <div class="card">
+                    <div class="card-header bg-danger text-white">
+                        <h3 class="mb-0">Comparativa: localStorage vs sessionStorage</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <label class="form-label">Escribe algo aquí:</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="entrada" value="prueba">
+                                <button class="btn btn-success" type="button" id="btnLocal">localStorage</button>
+                                <button class="btn btn-info" type="button" id="btnSession">sessionStorage</button>
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="card border-success">
+                                    <div class="card-header bg-success text-white">localStorage</div>
+                                    <div class="card-body">
+                                        <p id="localValue" class="text-muted">vacío</p>
+                                        <ul class="small">
+                                            <li>Permanente</li>
+                                            <li>Se mantiene al cerrar</li>
+                                            <li>Compartido entre pestañas</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card border-info">
+                                    <div class="card-header bg-info text-white">sessionStorage</div>
+                                    <div class="card-body">
+                                        <p id="sessionValue" class="text-muted">vacío</p>
+                                        <ul class="small">
+                                            <li>Temporal (por pestaña)</li>
+                                            <li>Se limpia al cerrar</li>
+                                            <li>No se comparte</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <button class="btn btn-warning w-100" id="limpiarLocal">Borrar localStorage</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-warning w-100" id="limpiarSession">Borrar sessionStorage</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-dark w-100" id="limpiarTodo">Borrar todo</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const entrada = document.getElementById('entrada');
+        const btnLocal = document.getElementById('btnLocal');
+        const btnSession = document.getElementById('btnSession');
+        const localValue = document.getElementById('localValue');
+        const sessionValue = document.getElementById('sessionValue');
+        const limpiarLocal = document.getElementById('limpiarLocal');
+        const limpiarSession = document.getElementById('limpiarSession');
+        const limpiarTodo = document.getElementById('limpiarTodo');
+
+        const KEY = 'texto';
+
+        function cargar() {
+            const l = localStorage.getItem(KEY);
+            const s = sessionStorage.getItem(KEY);
+
+            if (l) localValue.textContent = l;
+            if (s) sessionValue.textContent = s;
+        }
+
+        btnLocal.addEventListener('click', function() {
+            const txt = entrada.value;
+            if (txt) {
+                localStorage.setItem(KEY, txt);
+                localValue.textContent = txt;
+            }
+        });
+
+        btnSession.addEventListener('click', function() {
+            const txt = entrada.value;
+            if (txt) {
+                sessionStorage.setItem(KEY, txt);
+                sessionValue.textContent = txt;
+            }
+        });
+
+        limpiarLocal.addEventListener('click', function() {
+            localStorage.removeItem(KEY);
+            localValue.textContent = 'vacío';
+        });
+
+        limpiarSession.addEventListener('click', function() {
+            sessionStorage.removeItem(KEY);
+            sessionValue.textContent = 'vacío';
+        });
+
+        limpiarTodo.addEventListener('click', function() {
+            localStorage.removeItem(KEY);
+            sessionStorage.removeItem(KEY);
+            localValue.textContent = 'vacío';
+            sessionValue.textContent = 'vacío';
+        });
+
+        cargar();
+    </script>
+</body>
+</html>
