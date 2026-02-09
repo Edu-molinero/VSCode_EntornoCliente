@@ -3,7 +3,7 @@
 
   <!-- Contador de tareas -->
   <div class="alert alert-info" role="alert">
-    <strong>Tareas totales:</strong> {{ cantidadTareas }} | 
+    <strong>Tareas totales:</strong> {{ cantidadTareas }} |
     <strong>Completadas:</strong> {{ cantidadCompletadas }}
   </div>
 
@@ -12,12 +12,8 @@
     <div class="card-body">
       <h5 class="card-title">Agregar nueva tarea</h5>
       <div class="input-group">
-        <input 
-          type="text" 
-          [(ngModel)]="nuevaTarea" 
-          placeholder="Escribe una nueva tarea..." 
-          class="form-control"
-          (keyup.enter)="agregarTarea()"/>
+        <input type="text" [(ngModel)]="nuevaTarea" placeholder="Escribe una nueva tarea..." class="form-control"
+          (keyup.enter)="agregarTarea()" />
         <button (click)="agregarTarea()" class="btn btn-primary">Agregar</button>
       </div>
     </div>
@@ -27,34 +23,28 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Lista de Tareas</h5>
-      
+
       @if (tareas.length === 0) {
-        <div class="alert alert-warning" role="alert">
-          No hay tareas. ¡Agrega una nueva!
-        </div>
+      <div class="alert alert-warning" role="alert">
+        No hay tareas. ¡Agrega una nueva!
+      </div>
       } @else {
-        <ul class="list-group">
-          @for (tarea of tareas; track tarea.id) {
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-              <div class="flex-grow-1">
-                <input 
-                  type="checkbox" 
-                  [checked]="tarea.completada"
-                  (change)="toggleCompletada(tarea.id)"
-                  class="form-check-input me-2"/>
-                <span [class.text-muted]="tarea.completada" 
-                      [class.text-decoration-line-through]="tarea.completada">
-                  {{ tarea.texto }}
-                </span>
-              </div>
-              <button 
-                (click)="eliminarTarea(tarea.id)" 
-                class="btn btn-sm btn-danger">
-                Eliminar
-              </button>
-            </li>
-          }
-        </ul>
+      <ul class="list-group">
+        @for (tarea of tareas; track tarea.id) {
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div class="flex-grow-1">
+            <input type="checkbox" [checked]="tarea.completada" (change)="toggleCompletada(tarea.id)"
+              class="form-check-input me-2" />
+            <span [class.text-muted]="tarea.completada" [class.text-decoration-line-through]="tarea.completada">
+              {{ tarea.texto }}
+            </span>
+          </div>
+          <button (click)="eliminarTarea(tarea.id)" class="btn btn-sm btn-danger">
+            Eliminar
+          </button>
+        </li>
+        }
+      </ul>
       }
     </div>
   </div>

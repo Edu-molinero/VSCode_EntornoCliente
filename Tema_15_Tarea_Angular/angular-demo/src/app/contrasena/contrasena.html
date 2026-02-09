@@ -6,57 +6,35 @@
       <div class="card mb-4">
         <div class="card-body">
           <h5 class="card-title">Configuración</h5>
-          
+
           <!-- Slider de longitud -->
           <div class="mb-3">
             <label for="longitud" class="form-label">Longitud de la contraseña: <strong>{{ longitud }}</strong></label>
-            <input 
-              type="range" 
-              class="form-range" 
-              id="longitud"
-              min="4" 
-              max="50" 
-              [(ngModel)]="longitud"/>
+            <input type="range" class="form-range" id="longitud" min="4" max="50" [(ngModel)]="longitud" />
           </div>
 
           <!-- Checkboxes -->
           <div class="mb-3">
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
-                id="mayusculas"
-                [(ngModel)]="incluirMayusculas"/>
+              <input type="checkbox" class="form-check-input" id="mayusculas" [(ngModel)]="incluirMayusculas" />
               <label class="form-check-label" for="mayusculas">
                 Incluir mayúsculas (A-Z)
               </label>
             </div>
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
-                id="minusculas"
-                [(ngModel)]="incluirMinusculas"/>
+              <input type="checkbox" class="form-check-input" id="minusculas" [(ngModel)]="incluirMinusculas" />
               <label class="form-check-label" for="minusculas">
                 Incluir minúsculas (a-z)
               </label>
             </div>
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
-                id="numeros"
-                [(ngModel)]="incluirNumeros"/>
+              <input type="checkbox" class="form-check-input" id="numeros" [(ngModel)]="incluirNumeros" />
               <label class="form-check-label" for="numeros">
                 Incluir números (0-9)
               </label>
             </div>
             <div class="form-check">
-              <input 
-                type="checkbox" 
-                class="form-check-input" 
-                id="simbolos"
-                [(ngModel)]="incluirSimbolos"/>
+              <input type="checkbox" class="form-check-input" id="simbolos" [(ngModel)]="incluirSimbolos" />
               <label class="form-check-label" for="simbolos">
                 Incluir símbolos (!@#$%...)
               </label>
@@ -75,31 +53,25 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Contraseña Generada</h5>
-          
+
           @if (contrasenaGenerada) {
-            <div class="mb-3">
-              <div class="input-group">
-                <input 
-                  type="text" 
-                  class="form-control" 
-                  [value]="contrasenaGenerada"
-                  readonly/>
-                <button 
-                  (click)="copiarAlPortapapeles()" 
-                  class="btn btn-outline-secondary">
-                  <i class="bi bi-clipboard"></i> Copiar
-                </button>
-              </div>
-              @if (copiado) {
-                <div class="alert alert-success mt-2 mb-0" role="alert">
-                  ¡Contraseña copiada al portapapeles!
-                </div>
-              }
+          <div class="mb-3">
+            <div class="input-group">
+              <input type="text" class="form-control" [value]="contrasenaGenerada" readonly />
+              <button (click)="copiarAlPortapapeles()" class="btn btn-outline-secondary">
+                <i class="bi bi-clipboard"></i> Copiar
+              </button>
             </div>
+            @if (copiado) {
+            <div class="alert alert-success mt-2 mb-0" role="alert">
+              ¡Contraseña copiada al portapapeles!
+            </div>
+            }
+          </div>
           } @else {
-            <div class="alert alert-info" role="alert">
-              Haz clic en "Generar Contraseña" para crear una nueva contraseña
-            </div>
+          <div class="alert alert-info" role="alert">
+            Haz clic en "Generar Contraseña" para crear una nueva contraseña
+          </div>
           }
         </div>
       </div>
